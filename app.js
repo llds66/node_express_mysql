@@ -8,6 +8,9 @@ const cors = require('cors')
 app.use(cors())
 // 解析 application/x-www-form-urlencoded格式的表单数据的中间件
 app.use(express.urlencoded({ extended: false }))
+// 导入user用户路由模块
+const userRouter = require('./router/user')
+app.use('/api',userRouter)
 // write your code here...
 
 // 调用 app.listen 方法，指定端口号并启动web服务器
