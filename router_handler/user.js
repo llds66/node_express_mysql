@@ -16,10 +16,10 @@ exports.regUser = (req, res) => {
   // 可接受body体的内容
   // console.log(userinfo);
   // 1.判断是否合法
-  if (!userinfo.username || !userinfo.password) {
-    // 不合法，返回客户端错误信息
-    return res.send({ status: 1, messsage: '用户名或密码不为空！！' })
-  }
+  // if (!userinfo.username || !userinfo.password) {
+  //   // 不合法，返回客户端错误信息
+  //   return res.send({ status: 1, messsage: '用户名或密码不为空！！' })
+  // }
   //2.用户名是否被占用
   const sql = `select * from ev_users where username=?`
   db.query(sql, [userinfo.username], function (err, results) {

@@ -30,6 +30,16 @@ const userRouter = require('./router/user')
 app.use('/api',userRouter)
 // write your code here...
 
+
+// 全局错误中间件
+const joi = require('joi')
+app.use(function (err, req, res, next) {
+  // 数据验证失败
+  if (err instanceof joi.ValidationError) return res.cc(err)
+  // 未知错误
+  res.cc(err)
+})
+
 // 调用 app.listen 方法，指定端口号并启动web服务器
 app.listen(3007, function () {
   console.log('api server running at http://127.0.0.1:3007')
