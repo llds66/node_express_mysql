@@ -4,7 +4,8 @@
 
 // 导入数据库模块
 const db = require('../db/index')
-
+// 导入bcryptjs对用户密码进行加密
+const bcrypt = require('bcryptjs')
 
 
 // 注册用户的处理函数
@@ -32,6 +33,10 @@ exports.regUser = (req, res) => {
       return res.send({ status: 1, message: '用户名被占用，请更换其他用户名！' })
     }
     // TODO: 用户名可用，继续后续流程...
+    // bcryptjs密码加密
+    console.log(userinfo);
+    userinfo.password = bcrypt.hashSync(userinfo.password, 10)
+    console.log('加密后：',userinfo);
     res.send('reguser OK')
 
   })
