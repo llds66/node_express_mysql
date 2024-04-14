@@ -34,11 +34,22 @@ exports.regUser = (req, res) => {
     }
     // TODO: 用户名可用，继续后续流程...
     // bcryptjs密码加密
-    console.log(userinfo);
+    // console.log(userinfo);
     userinfo.password = bcrypt.hashSync(userinfo.password, 10)
-    console.log('加密后：',userinfo);
-    res.send('reguser OK')
+    // console.log('加密后：',userinfo);
 
+    // 新增用户
+    const sql = 'insert into ev_users set ?'
+    db.query(sql, { username: userinfo.username, password: userinfo.password }, function (err, results) {
+      // 执行 SQL 语句失败
+      if (err) return res.send({ status: 1, message: err.message })
+      // SQL 语句执行成功，但影响行数不为 1
+      if (results.affectedRows !== 1) {
+        return res.send({ status: 1, message: '注册用户失败，请稍后再试！' })
+      }
+      // 注册成功
+      res.send({ status: 0, message: '注册成功！' })
+    })
   })
 }
 
