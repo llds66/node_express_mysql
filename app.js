@@ -26,7 +26,7 @@ const config = require('./config')
 app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api\//] }))
 
 
-// 导入user用户路由模块
+//  一、注册登录用户路由模块
 const userRouter = require('./router/user')
 app.use('/api', userRouter)
 
@@ -41,6 +41,19 @@ app.use(function (err, req, res, next) {
   // 未知错误
   res.cc(err)
 })
+
+//  二、个人中心路由模块
+const userinfoRouter = require('./router/userinfo')
+app.use('my', userinfoRouter)
+
+
+
+
+
+
+
+
+
 
 app.listen(3007, function () {
   console.log('api server running at http://127.0.0.1:3007')

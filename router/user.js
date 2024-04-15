@@ -1,5 +1,5 @@
 /**
- * user路由模块
+ * user注册登录路由模块
  */
 
 const express = require('express')
