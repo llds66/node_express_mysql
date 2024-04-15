@@ -1,5 +1,5 @@
 /*
-**校验规则
+**定义校验规则
 */
 
 const joi = require('joi')
