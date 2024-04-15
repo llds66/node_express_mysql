@@ -1,3 +1,7 @@
+/*
+**校验规则
+*/
+
 const joi = require('joi')
 
 /**

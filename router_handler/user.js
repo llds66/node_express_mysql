@@ -8,7 +8,7 @@ const db = require('../db/index')
 const bcrypt = require('bcryptjs')
 
 
-// 注册用户的处理函数
+// 一、注册用户的处理函数
 exports.regUser = (req, res) => {
 
   // 接收post请求的数据
@@ -53,7 +53,7 @@ exports.regUser = (req, res) => {
   })
 }
 
-// 登录的处理函数
+// 二、登录的处理函数
 exports.login = (req, res) => {
   res.send('login OK')
 }
