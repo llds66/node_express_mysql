@@ -4,6 +4,9 @@
 const db = require('../db/index')
 // 导入bcryptjs对用户密码进行加密
 const bcrypt = require('bcryptjs')
+// 导入jwttoken相关
+const jwt = require('jsonwebtoken')
+const config = require('../config')
 
 
 // **一、注册用户的处理函数**
@@ -38,11 +41,11 @@ exports.regUser = (req, res) => {
 
 // **二、登录的处理函数**
 exports.login = (req, res) => {
-  // 1.判断用户名是否存在
+  // 1.判断用户名是否存在 results[0]为用户的信息
   const userinfo = req.body //接收请求body体中的内容
   const sql = `select * from ev_users where username=?` //定义sql语句
   db.query(sql, userinfo.username, (err, results) => {
-    if (err) return res.cc(err)  //sql语句失败，[??res.cc(err)]
+    if (err) return res.cc(err)  //sql语句失败 
     if (results.length !== 1) return res.cc('登录失败！没有该用户') //失败2:查询到的数据条数错误 
 
     // 2.密码是否匹配 调用bcrypt.compareSync(提交密码,数据库密码)返回true/flase来判断
@@ -52,8 +55,15 @@ exports.login = (req, res) => {
     }
 
     // 3.成功 生成token
-
-    res.send('登陆成功')
+    const user = { ...results[0], password: '', user_pic: '' } //展开运算符,得到要生成token的字段
+    const tokenStr = jwt.sign(user, config.jwtSecretKey, {
+      expiresIn: '10h'
+    }) //将信息加密
+    res.send({
+      status: 0,
+      message: '登录成功！',
+      token: 'Bearer ' + tokenStr //方便客户端使用
+    })
 
 
   })
