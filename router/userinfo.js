@@ -2,11 +2,10 @@
  * 个人中心模块
  */
 
-const express = require('epxress')
+const express = require('express')
 const router = express.Router()
+const userinfo_handler = require('../router_handler/userinfo')
 
-router.get('/userinfo', (req, res) => {
-    res.send('请求成功！')
-})
+router.get('/userinfo', userinfo_handler.getUserInfo)
 
 module.exports = router

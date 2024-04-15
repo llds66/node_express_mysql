@@ -44,7 +44,7 @@ app.use(function (err, req, res, next) {
 
 //  二、个人中心路由模块
 const userinfoRouter = require('./router/userinfo')
-app.use('my', userinfoRouter)
+app.use('my', userinfoRouter) //需要验证token
 
 
 
