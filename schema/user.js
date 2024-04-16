@@ -29,13 +29,13 @@ exports.reg_login_schema = {
 }
 
 //2.验证表单数据
-const id = joi.number().integer().min(1).required
-const nickname = joi.string().required
-const email = joi.string().email().required
+const id = joi.number().integer().min(1).required()
+const nickname = joi.string().required()
+const user_email = joi.string().email().required()
 exports.update_userinfo_schema = {
   body: {
     id,
     nickname,
-    email
+    email: user_email
   }
 }

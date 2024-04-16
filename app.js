@@ -26,12 +26,20 @@ const config = require('./config')
 app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api\//] }))
 
 
+
 //  一、注册登录用户路由模块
 const userRouter = require('./router/user')
 app.use('/api', userRouter)
 
+
+
+//  二、个人中心路由模块
+const userinfoRouter = require('./router/userinfo')
+app.use('/my', userinfoRouter) //需要验证token
+
+
 const joi = require('joi')
-// 全局错误中间件
+// 全局错误中间件:中间件会在路由中间件的后面添加，用于处理在请求处理过程中发生的错误
 app.use(function (err, req, res, next) {
   // 数据验证失败
   if (err instanceof joi.ValidationError) return res.cc(err)
@@ -41,13 +49,6 @@ app.use(function (err, req, res, next) {
   // 未知错误
   res.cc(err)
 })
-
-//  二、个人中心路由模块
-const userinfoRouter = require('./router/userinfo')
-app.use('/my', userinfoRouter) //需要验证token
-
-
-
 
 
 

@@ -21,5 +21,10 @@ exports.getUserInfo = (req, res) => {
 
 // 2.更新用户信息函数
 exports.updateUserInfo = (req, res) => {
-    res.send('更新成功！')
+    const sql = `update ev_users set ? where id=?`    //定义sql
+    db.query(sql, [req.body, req.body.id], (err, results) => {
+        if (err) return res.cc(err) // sql执行失败
+        if (results.affectedRows !== 1) return res.cc('更新用户信息失败') //影响行数错误
+        return res.cc('更新信息成功', 0)
+    })
 }
