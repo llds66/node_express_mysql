@@ -28,7 +28,7 @@ exports.reg_login_schema = {
   },
 }
 
-//2.验证表单数据
+//2.更新信息：验证表单数据
 const id = joi.number().integer().min(1).required()
 const nickname = joi.string().required()
 const user_email = joi.string().email().required()
@@ -44,5 +44,13 @@ exports.update_password_schema = {
   body: {
     oldPwd: password,  //password规则
     newPwd: joi.not(joi.ref('oldPwd')).concat(password)
+  }
+}
+
+// 4.更新头像：检验
+const avatar = joi.string().dataUri().required() //dataUri()规则的数据
+exports.update_avataar_schema = {
+  body: {
+    avatar,
   }
 }

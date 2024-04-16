@@ -9,7 +9,7 @@ const userinfo_handler = require('../router_handler/userinfo')  //封装路由�
 const expressJoi = require('@escook/express-joi')
 const { update_userinfo_schema } = require('../schema/user')//数据检验
 const { update_password_schema } = require('../schema/user') //更新密码规则
-
+const { update_avataar_schema } = require('../schema/user') //更新头像的校验
 // 1.获取用户信息模块
 router.get('/userinfo', userinfo_handler.getUserInfo)
 
@@ -20,6 +20,6 @@ router.post('/userinfo', expressJoi(update_userinfo_schema), userinfo_handler.up
 router.post('/updatepwd', expressJoi(update_password_schema), userinfo_handler.updatePassword)
 
 // 4.更新用户头像模块
-router.post('/upadate/avatar', userinfo_handler.updateAvatar)
+router.post('/upadate/avatar', expressJoi(update_avataar_schema), userinfo_handler.updateAvatar)
 
 module.exports = router
