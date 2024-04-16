@@ -28,3 +28,8 @@ exports.updateUserInfo = (req, res) => {
         return res.cc('更新信息成功', 0)
     })
 }
+
+// 3.更新密码的函数
+exports.updatePassword = (req, res) => {
+    res.send('更新密码成功')
+}
