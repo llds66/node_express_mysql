@@ -16,7 +16,10 @@ router.get('/userinfo', userinfo_handler.getUserInfo)
 // 2.更新用户信息模块
 router.post('/userinfo', expressJoi(update_userinfo_schema), userinfo_handler.updateUserInfo)
 
-// 3.重置密码
+// 3.重置密码模块
 router.post('/updatepwd', expressJoi(update_password_schema), userinfo_handler.updatePassword)
+
+// 4.更新用户头像模块
+router.post('/upadate/avatar', userinfo_handler.updateAvatar)
 
 module.exports = router

@@ -50,3 +50,8 @@ exports.updatePassword = (req, res) => {
         })
     })
 }
+
+// 4.更新用户头像的函数
+exports.updateAvatar = (req, res) => {
+    res.send('更新用户成功')
+}
