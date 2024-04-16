@@ -54,7 +54,9 @@ exports.updatePassword = (req, res) => {
 // 4.更新用户头像的函数
 exports.updateAvatar = (req, res) => {
     const sql = `update ev_users set user_pic=? where id=?`
-    if (err) return res.cc(err)
-    if (results.length !== 1) return res.cc('更新密码失败 用户不存在')
-    return res.cc('更新用户头像成功！', 0)
+    db.query(sql, [req.body.avatar, req.user.id], (err, results) => {
+        if (err) return res.cc(err)
+        if (results.affectedRows !== 1) return res.cc('更新密码失败 用户不存在')
+        return res.cc('更新用户头像成功！', 0)
+    })
 }
