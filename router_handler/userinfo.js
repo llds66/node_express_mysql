@@ -2,10 +2,10 @@
  * 个人中心路由处理函数模块
  */
 
-// 获取用户信息
 const { date } = require('joi')
 const db = require('../db/index')
 
+// 1.获取用户信息函数
 exports.getUserInfo = (req, res) => {
     const sql = `select id,username,nickname,email,user_pic from ev_users where id=?` // sql语句
     db.query(sql, req.user.id, (err, results) => {
@@ -17,4 +17,9 @@ exports.getUserInfo = (req, res) => {
             data: results[0]
         })
     })
+}
+
+// 2.更新用户信息函数
+exports.updateUserInfo = (req, res) => {
+    res.send('更新成功！')
 }
