@@ -39,3 +39,10 @@ exports.update_userinfo_schema = {
     email: user_email
   }
 }
+// 3.验证密码：新旧密码符合规则，新与旧不同
+exports.update_password_schema = {
+  body: {
+    oldPwd: password,  //password规则
+    newPwd: joi.not(joi.ref('oldPwd')).concat(password)
+  }
+}
