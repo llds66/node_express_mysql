@@ -2,6 +2,7 @@
 **定义校验规则
 */
 
+const e = require('express')
 const joi = require('joi')
 
 /**
@@ -13,19 +14,28 @@ const joi = require('joi')
  * pattern(正则表达式) 值必须符合正则表达式的规则
  */
 
-// 用户名的验证规则
+// 1.注册和登录表单的验证规则对象
 const username = joi.string().alphanum().min(1).max(10).required()
-// 密码的验证规则
 const password = joi
   .string()
   .pattern(/^[\S]{6,12}$/)
   .required()
 
-// 注册和登录表单的验证规则对象
 exports.reg_login_schema = {
-  // 表示需要对 req.body 中的数据进行验证
   body: {
     username,
     password,
   },
+}
+
+//2.验证表单数据
+const id = joi.number().integer().min(1).required
+const nickname = joi.string().required
+const email = joi.string().email().required
+exports.update_userinfo_schema = {
+  body: {
+    id,
+    nickname,
+    email
+  }
 }
