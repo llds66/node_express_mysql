@@ -18,4 +18,5 @@ router.post('/userinfo', expressJoi(update_userinfo_schema), userinfo_handler.up
 
 // 3.重置密码
 router.post('/updatepwd', expressJoi(update_password_schema), userinfo_handler.updatePassword)
+
 module.exports = router

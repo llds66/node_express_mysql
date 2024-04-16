@@ -4,6 +4,7 @@
 
 const { date } = require('joi')
 const db = require('../db/index')
+const bcrypt = require('bcryptjs')
 
 // 1.获取用户信息函数
 exports.getUserInfo = (req, res) => {
@@ -31,5 +32,21 @@ exports.updateUserInfo = (req, res) => {
 
 // 3.更新密码的函数
 exports.updatePassword = (req, res) => {
-    res.send('更新密码成功')
+    const sql = `select * from ev_users where id=?`    //sql语句
+    db.query(sql, req.user.id, (err, results) => {
+        if (err) return res.cc(err) // sql执行失败
+        if (results.length !== 1) return res.cc('更新密码失败 用户不存在') //影响行数错误
+        // 判断旧密码是否正确
+        const compareResult = bcrypt.compareSync(req.body.oldPwd, results[0].password)
+        if (!compareResult) return res.cc('旧密码错误')
+
+        // 更新密码
+        const sql = `update ev_users set password=? where id=?`
+        const newPwd = bcrypt.hashSync(req.body.newPwd, 10)
+        db.query(sql, [newPwd, req.user.id], (err, results) => {
+            if (err) return res.cc(err) // sql执行失败
+            if (results.affectedRows !== 1) return res.cc('更新密码失败') //影响行数错误
+            res.cc('更新密码成功', 0)
+        })
+    })
 }
