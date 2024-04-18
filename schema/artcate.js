@@ -23,9 +23,18 @@ exports.delete_cate_schema = {
     }
 }
 
-// 3.根据id分类的规则
+// 3.根据id获取文章分类的规则
 exports.get_cate_schema = {
     param: {
         id
+    }
+}
+
+// 4.根据id更新文章分类的规则
+exports.update_cate_schema = {
+    body: {
+        Id: id,
+        name,
+        alias
     }
 }
