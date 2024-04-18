@@ -39,7 +39,7 @@ app.use('/my', userinfoRouter) //需要验证token
 const artCateRouter = require('./router/artcate')
 app.use('/my/article',artCateRouter)
 
-// 四、文章路由模块
+// 四、文章发布路由模块
 const articleRouter = require('./router/article')
 app.use('/my/article',articleRouter)
 
