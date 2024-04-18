@@ -9,6 +9,7 @@ const bcrypt = require('bcryptjs')
 // 1.获取用户信息函数
 exports.getUserInfo = (req, res) => {
     const sql = `select id,username,nickname,email,user_pic from ev_users where id=?` // sql语句
+    //req.user.id通过token获取id,请求不需要携带id
     db.query(sql, req.user.id, (err, results) => {
         if (err) return res.cc(err) // sql执行失败
         if (results.length !== 1) return res.cc('获取用户信息失败') //影响行数错误
@@ -54,6 +55,7 @@ exports.updatePassword = (req, res) => {
 // 4.更新用户头像的函数
 exports.updateAvatar = (req, res) => {
     const sql = `update ev_users set user_pic=? where id=?`
+    //req.user.id通过token获取id,请求不需要携带id
     db.query(sql, [req.body.avatar, req.user.id], (err, results) => {
         if (err) return res.cc(err)
         if (results.affectedRows !== 1) return res.cc('更新密码失败 用户不存在')
