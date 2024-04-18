@@ -36,8 +36,12 @@ const userinfoRouter = require('./router/userinfo')
 app.use('/my', userinfoRouter) //需要验证token
 
 // 三、文章分类列表路由模块
-const artCateRouter = require('./router/aetcate')
+const artCateRouter = require('./router/artcate')
 app.use('/my/article',artCateRouter)
+
+// 四、文章路由模块
+const articleRouter = require('./router/article')
+app.use('/my/article',articleRouter)
 
 const joi = require('joi')
 // 全局错误中间件:中间件会在路由中间件的后面添加，用于处理在请求处理过程中发生的错误
