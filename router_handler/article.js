@@ -61,3 +61,8 @@ exports.getArticleById = (req,res) =>{
     })
 }
 
+// 5.根据id更新文章分类
+exports.updateCateById = (req,res) =>{
+    res.send('根据id更新成功！')
+}
+
