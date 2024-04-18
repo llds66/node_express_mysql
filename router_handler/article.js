@@ -47,3 +47,8 @@ exports.daleteCateById = (req,res) =>{
     
 }
 
+// 4.根据id获取文章分类
+exports.getArticleById = (req,res) =>{
+    res.send('id 获取文章成功')
+}
+
