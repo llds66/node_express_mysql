@@ -25,6 +25,8 @@ const config = require('./config')
 //unless:不需要认证的接口
 app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api\//] }))
 
+// 这个中间件，托管静态资源文件
+app.use('/uploads', express.static('./uploads'))
 
 
 //  一、注册登录用户路由模块
