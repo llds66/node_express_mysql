@@ -1,8 +1,9 @@
 /**
- * 获取文章列表分类的模块
+ * 文章列表分类
  */
 const db = require('../db/index')
 
+// 1.获取文章列表分类的模块
 exports.getArticleCates = (req, res) => {
     const sql = 'select * from ev_article_cate where is_delete=0 order by id asc'
     db.query(sql, (err, results) => {
@@ -15,4 +16,8 @@ exports.getArticleCates = (req, res) => {
         })
     })
 
+}
+// 2.新增文章分类
+exports.addArticleCates=(req,res)=>{
+    res.send('新增文章分类成功')
 }
