@@ -22,3 +22,10 @@ exports.delete_cate_schema = {
         id
     }
 }
+
+// 3.根据id分类的规则
+exports.get_cate_schema = {
+    param: {
+        id
+    }
+}
