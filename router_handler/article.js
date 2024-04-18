@@ -49,6 +49,15 @@ exports.daleteCateById = (req,res) =>{
 
 // 4.根据id获取文章分类
 exports.getArticleById = (req,res) =>{
-    res.send('id 获取文章成功')
+    const sql = `select * from ev_article_cate where id=?`
+    db.query(sql,req.params.id,(err,results) =>{
+        if (err) return res.cc(err)
+        if (results.length !== 1) return res.cc('获取文章分类失败！')
+        res.send({
+            status:0,
+            message:'获取文章分类成功',
+            data:results[0]
+        })
+    })
 }
 
