@@ -10,4 +10,7 @@ router.get('/cates',artcate_handler.getArticleCates)
 //2.新增文章分类的接口
 router.post('/addcates',expressJoi(add_cate_schema),artcate_handler.addArticleCates) 
 
+// 3.删除文章分类的接口
+router.get('/deletecate/:id',artcate_handler.daleteCateById)
+
 module.exports = router

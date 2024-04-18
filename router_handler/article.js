@@ -35,3 +35,9 @@ exports.addArticleCates = (req, res) => {
         })
     })
 }
+
+// 3.删除文章分类
+exports.daleteCateById = (req,res) =>{
+    res.send('删除成功。。。')
+}
+
