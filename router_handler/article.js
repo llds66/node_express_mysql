@@ -19,5 +19,13 @@ exports.getArticleCates = (req, res) => {
 }
 // 2.新增文章分类
 exports.addArticleCates=(req,res)=>{
-    res.send('新增文章分类成功')
+    // 2.1是否存在，占用
+    const sql = `select * from ev_article_cate where name=? or alias=?`
+    db.query(sql,[req.body.name,req.body.alias],(err,results) =>{
+        if(err) return res.cc(err)
+        if(results.length === 2) return res.cc('名称与别名已占用,请更换重试。')
+        if(results.length === 1 && results[0].name === req.body.name) return res.cc('名称已占用,请更换重试。')
+        if(results.length === 1 && results[0].alias === req.body.alias) return res.cc('别名已占用,请更换重试。')
+        res.send('新增成功')
+    })
 }
